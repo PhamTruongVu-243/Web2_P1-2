@@ -1,4 +1,6 @@
 using BT1.Data;
+using BT1.Repositories;
+using BT1.Repositories.WebAPI_simple.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,7 @@ builder.Services.AddSwaggerGen();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
+builder.Services.AddScoped<IBookRepository, SQLBookRepository>();
 
 var app = builder.Build();
 
